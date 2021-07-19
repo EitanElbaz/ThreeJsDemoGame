@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
-import { Object3D, Vector3, Quaternion } from 'three';
+import { Vector3, Quaternion, Mesh } from 'three';
 import { useFrame } from '@react-three/fiber';
 import { usePlayerControls } from '../../Hooks';
 
 type Props = {
-    target: Object3D;
+    target: React.MutableRefObject<Mesh | undefined>;
     // api: WorkerApi;
 };
 
@@ -16,6 +16,10 @@ const CharacterController: React.FC<Props> = ({ target }) => {
     const { moveRight, moveLeft, moveForward, moveBackward } = usePlayerControls();
 
     useFrame((state, delta) => {
+        if (!target.current) {
+            return;
+        }
+
         const newVelocity = velocity.current;
         const frameDecceleration = new Vector3(
             newVelocity.x * deceleration.current.x,
@@ -29,7 +33,7 @@ const CharacterController: React.FC<Props> = ({ target }) => {
 
         newVelocity.add(frameDecceleration);
 
-        const controlObject = target;
+        const controlObject = target.current;
         const Q = new Quaternion();
         const A = new Vector3();
         const R = controlObject.quaternion.clone();
