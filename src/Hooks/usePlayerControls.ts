@@ -8,9 +8,6 @@ const keys = {
     KeyD: 'moveRight',
     Space: 'jump',
 };
-function actionByKey(key) {
-    return keys[key];
-}
 
 function usePlayerControls() {
     const [movement, setMovement] = useState({

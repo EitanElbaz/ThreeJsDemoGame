@@ -3,6 +3,7 @@ import { useBox } from '@react-three/cannon';
 import { useFrame, useThree } from '@react-three/fiber';
 import { Vector3 } from 'three';
 import { usePlayerControls } from '../../Hooks';
+import { ThirdPersonCamera } from '../Camera';
 
 type Props = {
     //
@@ -23,7 +24,6 @@ const Character: React.FC<Props> = () => {
     }, [api.velocity]);
 
     useFrame(() => {
-        // camera.position.copy(ref.current!.position);
         const direction = new Vector3();
 
         const frontVector = new Vector3(0, 0, (moveBackward ? 1 : 0) - (moveForward ? 1 : 0));
@@ -43,10 +43,13 @@ const Character: React.FC<Props> = () => {
     });
 
     return (
-        <mesh ref={ref} castShadow receiveShadow>
-            <boxBufferGeometry args={[1, 1, 1]} />
-            <meshStandardMaterial color="red" />
-        </mesh>
+        <>
+            {ref.current && <ThirdPersonCamera target={ref.current} />}
+            <mesh ref={ref} castShadow receiveShadow>
+                <boxBufferGeometry args={[1, 1, 1]} />
+                <meshStandardMaterial color="red" />
+            </mesh>
+        </>
     );
 };
 
