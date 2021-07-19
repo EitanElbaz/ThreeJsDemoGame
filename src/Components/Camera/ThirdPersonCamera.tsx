@@ -8,14 +8,12 @@ type Props = {
 };
 
 function targetWorldPosition(target: Object3D) {
-    const position = new Vector3();
-    position.setFromMatrixPosition(target.matrixWorld);
-    return position;
+    return target.getWorldPosition(target.position);
 }
 
 function calculateIdealOffset(target: Object3D) {
     const idealOffset = new Vector3(-0, 10, -15);
-    idealOffset.applyQuaternion(target.quaternion.setFromEuler(target.rotation, false));
+    idealOffset.applyQuaternion(target.quaternion);
     idealOffset.add(targetWorldPosition(target));
 
     // idealOffset.y = Math.max(idealOffset.y, terrain.GetHeight(idealOffset)[0] + 5.0);
@@ -26,7 +24,7 @@ function calculateIdealOffset(target: Object3D) {
 
 function calculateIdealLookat(target: Object3D) {
     const idealLookat = new Vector3(0, 5, 20);
-    idealLookat.applyQuaternion(target.quaternion.setFromEuler(target.rotation, false));
+    idealLookat.applyQuaternion(target.quaternion);
     idealLookat.add(targetWorldPosition(target));
     return idealLookat;
 }

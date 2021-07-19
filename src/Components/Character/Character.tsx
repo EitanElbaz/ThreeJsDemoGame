@@ -24,21 +24,25 @@ const Character: React.FC<Props> = () => {
     }, [api.velocity]);
 
     useFrame(() => {
-        const direction = new Vector3();
+        if (jump || moveBackward || moveForward || moveLeft || moveRight) {
+            const direction = new Vector3();
 
-        const frontVector = new Vector3(0, 0, (moveBackward ? 1 : 0) - (moveForward ? 1 : 0));
-        const sideVector = new Vector3((moveLeft ? 1 : 0) - (moveRight ? 1 : 0), 0, 0);
+            const frontVector = new Vector3(0, 0, (moveBackward ? 1 : 0) - (moveForward ? 1 : 0));
+            const sideVector = new Vector3((moveLeft ? 1 : 0) - (moveRight ? 1 : 0), 0, 0);
 
-        direction
-            .subVectors(frontVector, sideVector)
-            .normalize()
-            .multiplyScalar(SPEED)
-            .applyEuler(camera.rotation);
+            direction
+                .subVectors(frontVector, sideVector)
+                .normalize()
+                .multiplyScalar(SPEED)
+                .applyEuler(camera.rotation);
 
-        api.velocity.set(direction.x, velocity.current[1], direction.z);
+            api.velocity.set(direction.x, velocity.current[1], direction.z);
+            // api.angularVelocity.set(0, 0, 0);
+            // api.position.set(direction.x, velocity.current[1], direction.z);
 
-        if (jump && Math.abs(Number(velocity.current[1].toFixed(2))) < 0.05) {
-            api.velocity.set(velocity.current[0], 8, velocity.current[2]);
+            if (jump && Math.abs(Number(velocity.current[1].toFixed(2))) < 0.05) {
+                api.velocity.set(velocity.current[0], 8, velocity.current[2]);
+            }
         }
     });
 
