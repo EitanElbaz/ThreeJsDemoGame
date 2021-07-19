@@ -3,7 +3,6 @@ import { useFrame, useThree } from '@react-three/fiber';
 import { Object3D, Vector3 } from 'three';
 
 type Props = {
-    //
     target: Object3D;
 };
 
@@ -30,7 +29,6 @@ function calculateIdealLookat(target: Object3D) {
 }
 
 const ThirdPersonCamera: React.FC<Props> = ({ target }) => {
-    const targetPos = useRef(new Vector3());
     const lookAt = useRef(new Vector3());
     const position = useRef(new Vector3());
     const { camera } = useThree();
