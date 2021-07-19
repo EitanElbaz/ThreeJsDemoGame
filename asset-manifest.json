@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/ThreeJsDemoGame/static/css/main.ce9ca846.chunk.css",
+    "main.js": "/ThreeJsDemoGame/static/js/main.f1b9b091.chunk.js",
+    "main.js.map": "/ThreeJsDemoGame/static/js/main.f1b9b091.chunk.js.map",
+    "runtime-main.js": "/ThreeJsDemoGame/static/js/runtime-main.10dc3899.js",
+    "runtime-main.js.map": "/ThreeJsDemoGame/static/js/runtime-main.10dc3899.js.map",
+    "static/js/2.da6c0770.chunk.js": "/ThreeJsDemoGame/static/js/2.da6c0770.chunk.js",
+    "static/js/2.da6c0770.chunk.js.map": "/ThreeJsDemoGame/static/js/2.da6c0770.chunk.js.map",
+    "index.html": "/ThreeJsDemoGame/index.html",
+    "static/css/main.ce9ca846.chunk.css.map": "/ThreeJsDemoGame/static/css/main.ce9ca846.chunk.css.map",
+    "static/js/2.da6c0770.chunk.js.LICENSE.txt": "/ThreeJsDemoGame/static/js/2.da6c0770.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.10dc3899.js",
+    "static/js/2.da6c0770.chunk.js",
+    "static/css/main.ce9ca846.chunk.css",
+    "static/js/main.f1b9b091.chunk.js"
+  ]
+}
