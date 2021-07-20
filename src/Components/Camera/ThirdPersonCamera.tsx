@@ -1,17 +1,16 @@
 import React, { useRef } from 'react';
+import { Mesh, Vector3 } from 'three';
 import { useFrame, useThree } from '@react-three/fiber';
-import { Object3D, Vector3 } from 'three';
 
 type Props = {
-    //
-    target: Object3D;
+    target: React.MutableRefObject<Mesh | undefined>;
 };
 
-function targetWorldPosition(target: Object3D) {
+function targetWorldPosition(target: Mesh) {
     return target.getWorldPosition(target.position);
 }
 
-function calculateIdealOffset(target: Object3D) {
+function calculateIdealOffset(target: Mesh) {
     const idealOffset = new Vector3(-0, 10, -15);
     idealOffset.applyQuaternion(target.quaternion);
     idealOffset.add(targetWorldPosition(target));
@@ -22,7 +21,7 @@ function calculateIdealOffset(target: Object3D) {
     return idealOffset;
 }
 
-function calculateIdealLookat(target: Object3D) {
+function calculateIdealLookat(target: Mesh) {
     const idealLookat = new Vector3(0, 5, 20);
     idealLookat.applyQuaternion(target.quaternion);
     idealLookat.add(targetWorldPosition(target));
@@ -30,14 +29,19 @@ function calculateIdealLookat(target: Object3D) {
 }
 
 const ThirdPersonCamera: React.FC<Props> = ({ target }) => {
-    const targetPos = useRef(new Vector3());
     const lookAt = useRef(new Vector3());
     const position = useRef(new Vector3());
     const { camera } = useThree();
 
     useFrame((state, delta) => {
-        const idealOffset = calculateIdealOffset(target);
-        const idealLookat = calculateIdealLookat(target);
+        const targetObj = target.current;
+
+        if (!targetObj) {
+            return;
+        }
+
+        const idealOffset = calculateIdealOffset(targetObj);
+        const idealLookat = calculateIdealLookat(targetObj);
 
         // const t = 0.05;
         // const t = 4.0 * timeElapsed;
