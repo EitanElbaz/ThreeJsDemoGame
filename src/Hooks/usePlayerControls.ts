@@ -1,47 +1,41 @@
-import { useHotkeys } from 'react-hotkeys-hook';
-import { useCallback, useState } from 'react';
-
-const keys = {
-    KeyW: 'moveForward',
-    KeyS: 'moveBackward',
-    KeyA: 'moveLeft',
-    KeyD: 'moveRight',
-    Space: 'jump',
-};
+import { useEffect, useRef } from 'react';
+import useControlsStore from '../Store/useControlsStore';
 
 function usePlayerControls() {
-    const [movement, setMovement] = useState({
+    const movement = useRef({
         moveForward: false,
         moveBackward: false,
         moveLeft: false,
         moveRight: false,
-        jump: false,
     });
-    const onUp = useCallback(
-        (e: KeyboardEvent) => {
-            if (keys[e.code]) {
-                setMovement(state => ({
-                    ...state,
-                    [keys[e.code]]: false,
-                }));
-            }
-        },
-        [setMovement],
-    );
-    const onDown = useCallback(
-        (e: KeyboardEvent) => {
-            if (keys[e.code]) {
-                setMovement(state => ({
-                    ...state,
-                    [keys[e.code]]: true,
-                }));
-            }
-        },
-        [setMovement],
-    );
+    const sub = useControlsStore.subscribe;
+    const { keyBinds } = useControlsStore();
 
-    useHotkeys('w,a,s,d,space', onDown, { keydown: true, keyup: false }, [onDown]);
-    useHotkeys('w,a,s,d,space', onUp, { keyup: true, keydown: false }, [onUp]);
+    useEffect(() => {
+        const onForwardDown = (newState: boolean) => {
+            movement.current.moveForward = newState;
+        };
+        const onBackwardDown = (newState: boolean) => {
+            movement.current.moveBackward = newState;
+        };
+        const onRightDown = (newState: boolean) => {
+            movement.current.moveRight = newState;
+        };
+        const onLeftDown = (newState: boolean) => {
+            movement.current.moveLeft = newState;
+        };
+        const unsubForward = sub(onForwardDown, state => state.down[keyBinds.moveForward]);
+        const unsubBackward = sub(onBackwardDown, state => state.down[keyBinds.moveBackwards]);
+        const unsubRight = sub(onRightDown, state => state.down[keyBinds.moveRight]);
+        const unsubLeft = sub(onLeftDown, state => state.down[keyBinds.moveLeft]);
+        return () => {
+            //
+            unsubForward();
+            unsubBackward();
+            unsubRight();
+            unsubLeft();
+        };
+    }, [sub, keyBinds, movement]);
 
     return movement;
 }

@@ -13,12 +13,14 @@ const CharacterController: React.FC<Props> = ({ target }) => {
     const acceleration = useRef(new Vector3(1, 0.25, 50.0));
     const velocity = useRef(new Vector3(0, 0, 0));
     // const velocity = useRef([0, 0, 0]);
-    const { moveRight, moveLeft, moveForward, moveBackward } = usePlayerControls();
+    const movement = usePlayerControls();
 
     useFrame((state, delta) => {
         if (!target.current) {
             return;
         }
+
+        const { moveForward, moveRight, moveLeft, moveBackward } = movement.current;
 
         const newVelocity = velocity.current;
         const frameDecceleration = new Vector3(

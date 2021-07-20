@@ -4,10 +4,12 @@ import { Sky } from '@react-three/drei';
 import { Physics, Debug } from '@react-three/cannon';
 import './App.css';
 import { Character, Ground } from './Components';
+import GlobalListener from './Components/GlobalListeners';
 
 function App() {
     return (
         <div id="app">
+            <GlobalListener />
             <Canvas>
                 <Physics gravity={[0, -30, 0]}>
                     <Debug color="green" scale={1.1}>
