@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Mesh } from 'three';
-import { ThirdPersonCamera } from '../Camera';
+import { ThirdPersonCamera } from 'components/Camera';
 import CharacterController from './CharacterController';
 
 type Props = {

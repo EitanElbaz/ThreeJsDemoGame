@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import useControlsStore from '../../Store/useControlsStore';
+import { useControlsStore } from 'store';
 
 const KeyListener: React.FC = () => {
     const { toggleDown } = useControlsStore();

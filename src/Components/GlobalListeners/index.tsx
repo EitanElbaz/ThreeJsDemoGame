@@ -1,10 +1,10 @@
 import React from 'react';
 import KeyListener from './KeyListener';
 
-const GlobalListener = () => (
+const GlobalListeners = () => (
     <>
         <KeyListener />
     </>
 );
 
-export default GlobalListener;
+export default GlobalListeners;

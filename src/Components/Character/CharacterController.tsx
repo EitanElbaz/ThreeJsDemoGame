@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Vector3, Quaternion, Mesh } from 'three';
 import { useFrame } from '@react-three/fiber';
-import { usePlayerControls } from '../../Hooks';
+import { usePlayerControls } from 'hooks';
 
 type Props = {
     target: React.MutableRefObject<Mesh | undefined>;

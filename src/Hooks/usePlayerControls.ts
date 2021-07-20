@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import useControlsStore from '../Store/useControlsStore';
+import { useControlsStore } from 'store';
 
 function usePlayerControls() {
     const movement = useRef({
