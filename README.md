@@ -1,3 +1,9 @@
+Just playing around with React Three Fiber and made a little cube walk around with W,A,S,D
+
+# Demo
+
+https://eitanelbaz.github.io/ThreeJsDemoGame/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
