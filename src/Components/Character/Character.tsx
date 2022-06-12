@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { Mesh } from 'three';
 import { useBox } from '@react-three/cannon';
 import { useFrame } from '@react-three/fiber';
+import { k_PLAYER_NAME } from 'consts';
 import { ThirdPersonCamera } from 'components/Camera';
 import CharacterController from './CharacterController';
 
@@ -14,8 +15,7 @@ const Character: React.FC<Props> = () => {
     const [boxRef, api] = useBox(() => ({
         args: [1, 1, 1],
         position: [0, 0, 0],
-        type: 'Kinematic',
-        isTrigger: true,
+        type: 'Dynamic',
     }));
 
     useFrame(() => {
@@ -25,7 +25,7 @@ const Character: React.FC<Props> = () => {
     return (
         <>
             <mesh ref={ref} castShadow receiveShadow>
-                <mesh ref={boxRef as any} parent={ref.current} />
+                <mesh ref={boxRef as any} name={k_PLAYER_NAME} parent={ref.current} />
                 <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
                 <meshStandardMaterial color="red" />
             </mesh>

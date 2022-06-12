@@ -6,7 +6,9 @@
             "store": ["../src/Store"],
             "components/*": ["../src/Components/*"],
             "components": ["../src/Components"],
-            "hooks": ["../src/Hooks"]
+            "hooks": ["../src/Hooks"],
+            "types": ["../src/Types"],
+            "consts": ["../src/Constants"]
         },
         "strictNullChecks": false
     }
