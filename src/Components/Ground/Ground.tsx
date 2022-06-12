@@ -13,7 +13,7 @@ const Ground: React.FC<Props> = props => {
         ...props,
     }));
     return (
-        <mesh ref={ref} receiveShadow>
+        <mesh ref={ref as any} receiveShadow>
             <planeBufferGeometry attach="geometry" args={[100, 100]} />
             <meshStandardMaterial attach="material" color="blue" />
         </mesh>

@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "baseUrl": ".",
+        "forceConsistentCasingInFileNames": false,
         "paths": {
             "store": ["../src/Store"],
             "components/*": ["../src/Components/*"],
