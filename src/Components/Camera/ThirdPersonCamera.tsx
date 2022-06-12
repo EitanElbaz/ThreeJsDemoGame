@@ -11,12 +11,12 @@ function targetWorldPosition(target: Mesh) {
 }
 
 function calculateIdealOffset(target: Mesh) {
-    const idealOffset = new Vector3(-0, 10, -15);
+    const idealOffset = new Vector3(-0, 45, -25);
     idealOffset.applyQuaternion(target.quaternion);
     idealOffset.add(targetWorldPosition(target));
 
     // idealOffset.y = Math.max(idealOffset.y, terrain.GetHeight(idealOffset)[0] + 5.0);
-    idealOffset.y = 5;
+    // idealOffset.y = 15;
 
     return idealOffset;
 }

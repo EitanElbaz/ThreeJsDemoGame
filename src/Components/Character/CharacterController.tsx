@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Vector3, Quaternion, Mesh } from 'three';
+import { Vector3, Mesh } from 'three';
 import { useFrame } from '@react-three/fiber';
 import { usePlayerControls } from 'hooks';
 
@@ -9,10 +9,9 @@ type Props = {
 };
 
 const CharacterController: React.FC<Props> = ({ target }) => {
-    const deceleration = useRef(new Vector3(-0.0005, -0.0001, -5));
-    const acceleration = useRef(new Vector3(1, 0.25, 50.0));
+    const deceleration = useRef(new Vector3(-5, -0.0001, -5));
+    const acceleration = useRef(new Vector3(50, 0.25, 50.0));
     const velocity = useRef(new Vector3(0, 0, 0));
-    // const velocity = useRef([0, 0, 0]);
     const movement = usePlayerControls();
 
     useFrame((state, delta) => {
@@ -33,11 +32,13 @@ const CharacterController: React.FC<Props> = ({ target }) => {
             Math.sign(frameDecceleration.z) *
             Math.min(Math.abs(frameDecceleration.z), Math.abs(newVelocity.z));
 
+        frameDecceleration.x =
+            Math.sign(frameDecceleration.x) *
+            Math.min(Math.abs(frameDecceleration.x), Math.abs(newVelocity.x));
+
         newVelocity.add(frameDecceleration);
 
         const controlObject = target.current;
-        const Q = new Quaternion();
-        const A = new Vector3();
         const R = controlObject.quaternion.clone();
 
         const acc = acceleration.current.clone();
@@ -53,16 +54,24 @@ const CharacterController: React.FC<Props> = ({ target }) => {
             newVelocity.z -= acc.z * delta;
         }
 
-        if (moveLeft) {
-            A.set(0, 1, 0);
-            Q.setFromAxisAngle(A, 4.0 * Math.PI * delta * acceleration.current.y);
-            R.multiply(Q);
-        }
         if (moveRight) {
-            A.set(0, 1, 0);
-            Q.setFromAxisAngle(A, 4.0 * -Math.PI * delta * acceleration.current.y);
-            R.multiply(Q);
+            newVelocity.x -= acc.x * delta;
         }
+        if (moveLeft) {
+            newVelocity.x += acc.x * delta;
+        }
+
+        // if you want the character to rotate
+        // if (moveLeft) {
+        //     A.set(0, 1, 0);
+        //     Q.setFromAxisAngle(A, 4.0 * Math.PI * delta * acceleration.current.y);
+        //     R.multiply(Q);
+        // }
+        // if (moveRight) {
+        //     A.set(0, 1, 0);
+        //     Q.setFromAxisAngle(A, 4.0 * -Math.PI * delta * acceleration.current.y);
+        //     R.multiply(Q);
+        // }
 
         controlObject.quaternion.copy(R);
 
