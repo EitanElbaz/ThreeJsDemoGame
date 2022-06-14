@@ -2,7 +2,8 @@ import React, { useCallback } from 'react';
 import { BoxProps, Triplet, useBox } from '@react-three/cannon';
 import { Platform } from 'types';
 import { usePlatformStore } from 'store';
-import { k_PLAYER_NAME } from 'consts';
+import { K_PLAYER_NAME } from 'consts';
+import { ThreeDText } from 'components';
 
 type Props = {
     position: Triplet;
@@ -15,7 +16,7 @@ const ContentPlatform: React.FC<Props> = ({ position, platform }) => {
     const onCollideBegin = useCallback<BoxProps['onCollideBegin']>(
         e => {
             console.log('collide', e);
-            if (e.body.name === k_PLAYER_NAME) {
+            if (e.body.name === K_PLAYER_NAME) {
                 setCurrentPlatform(platform);
             }
         },
@@ -23,7 +24,7 @@ const ContentPlatform: React.FC<Props> = ({ position, platform }) => {
     );
     const onCollideEnd = useCallback<BoxProps['onCollideEnd']>(
         e => {
-            if (e.body.name === k_PLAYER_NAME) {
+            if (e.body.name === K_PLAYER_NAME) {
                 console.log('collide end', e);
                 setCurrentPlatform(undefined);
             }
@@ -38,7 +39,12 @@ const ContentPlatform: React.FC<Props> = ({ position, platform }) => {
         onCollideEnd,
         type: 'Static',
     }));
-    return <mesh ref={ref as any} />;
+    return (
+        <group>
+            <mesh ref={ref as any} />
+            <ThreeDText text="hello" />
+        </group>
+    );
 };
 
 export default ContentPlatform;

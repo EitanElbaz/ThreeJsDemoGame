@@ -5,6 +5,10 @@
     "private": true,
     "config-overrides-path": "./config/config-overrides",
     "dependencies": {
+        "@emotion/react": "^11.9.3",
+        "@emotion/styled": "^11.9.3",
+        "@mui/icons-material": "^5.8.4",
+        "@mui/material": "^5.8.4",
         "@react-three/cannon": "^6.3.0",
         "@react-three/fiber": "^8.0.23",
         "react": "^18.1.0",
@@ -92,6 +96,7 @@
             "react/destructuring-assignment": 0,
             "@typescript-eslint/no-explicit-any": 0,
             "@typescript-eslint/no-use-before-define": 0,
+            "@typescript-eslint/ban-ts-comment": 0,
             "eqeqeq": 0,
             "import/no-extraneous-dependencies": [
                 "error",

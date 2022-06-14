@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import { Physics, Debug } from '@react-three/cannon';
 import './App.css';
 import { Character, GlobalListeners, Ground } from 'components';
+import { HUD } from 'gui';
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                     </Debug>
                 </Physics>
             </Canvas>
+            <HUD />
         </div>
     );
 }

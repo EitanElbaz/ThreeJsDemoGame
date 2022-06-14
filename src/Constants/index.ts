@@ -1,1 +1,1 @@
-export const k_PLAYER_NAME = 'player';
+export const K_PLAYER_NAME = 'player';

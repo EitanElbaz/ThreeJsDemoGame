@@ -8,7 +8,10 @@
             "components": ["../src/Components"],
             "hooks": ["../src/Hooks"],
             "types": ["../src/Types"],
-            "consts": ["../src/Constants"]
+            "consts": ["../src/Constants"],
+            "gui/*": ["../src/GUI/*"],
+            "gui": ["../src/GUI"],
+            "assets/*": ["../src/Assets/*"]
         },
         "strictNullChecks": false
     }
