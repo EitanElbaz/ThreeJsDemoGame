@@ -3,6 +3,7 @@ import { Mesh } from 'three';
 import { useBox } from '@react-three/cannon';
 import { useFrame } from '@react-three/fiber';
 import { K_PLAYER_NAME } from 'consts';
+import { PerspectiveCamera } from '@react-three/drei';
 import { ThirdPersonCamera } from 'components/Camera';
 import CharacterController from './CharacterController';
 

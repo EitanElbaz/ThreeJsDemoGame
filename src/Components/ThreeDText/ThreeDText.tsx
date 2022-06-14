@@ -1,24 +1,20 @@
-import React, { useEffect } from 'react';
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
-import { extend } from '@react-three/fiber';
+import React from 'react';
 import roboto from 'assets/Rubik_Regular_font.json';
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
-
-extend({ TextGeometry });
+import { Text3D } from '@react-three/drei';
 
 type Props = {
     text: string;
-    params?: TextGeometry['parameters'];
 };
-const ThreeDText: React.FC<Props> = ({ text, params }) => {
-    const font = new FontLoader().parse(roboto);
-
+const ThreeDText: React.FC<Props> = ({ text }) => {
     return (
-        <mesh>
-            {/* @ts-ignore */}
-            <textGeometry args={[text, { font, size: 10, height: 10 }]} />
-            <meshPhysicalMaterial attach="material" color="red" />
-        </mesh>
+        <group>
+            <mesh>
+                <Text3D font={roboto as any} height={1} size={5}>
+                    {text}
+                    <meshPhysicalMaterial attach="material" color="white" />
+                </Text3D>
+            </mesh>
+        </group>
     );
 };
 

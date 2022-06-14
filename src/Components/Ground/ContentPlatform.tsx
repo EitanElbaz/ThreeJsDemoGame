@@ -42,7 +42,7 @@ const ContentPlatform: React.FC<Props> = ({ position, platform }) => {
     return (
         <group>
             <mesh ref={ref as any} />
-            <ThreeDText text="hello" />
+            <ThreeDText text={platform} />
         </group>
     );
 };
